@@ -1,0 +1,77 @@
+ENTER=press enter key
+1. install requirements:
+    bash get_requirements.sh
+2. update cmake to 3.24 or higher:
+    sudo apt remove cmake
+    cd /opt
+    wget https://github.com/Kitware/CMake/releases/download/v3.28.6/cmake-3.28.6-linux-x86_64.sh
+    chmod +x cmake-3.28.6-linux-x86_64.sh
+    bash cmake-3.28.6-linux-x86_64.sh
+    sudo ln -s /opt/cmake-3.28.6-linux-x86_64/bin/* /usr/local/bin
+3. update gcc and g++ to 12:
+    (to do)
+    (https://blog.byhi.org/archives/586372ad.html)
+
+1.install requierements
+    bash get_requirements.sh
+2.1 fetch a web page
+    a)sudo apt install telnet
+    b)telnet cs144.keithw.org http
+        GET /hello HTTP/1.1 ENTER
+        Host: cs144.keithw.org ENTER
+        Connection: close ENTER
+        ENTER
+    c)telnet cs144.keithw.org http
+        GET /lab0/ursocool HTTP/1.1 ENTER
+        Host: cs144.keithw.org ENTER
+        Connection: close ENTER
+        ENTER
+
+        And then i see my secret code is "73494".
+2.2 send yourself an email
+    telnet smtp.163.com smtp
+        helo 163.com ENTER
+        auth login ENTER
+        MAIL FROM: mymailname@163.com ENTER
+        REPT TO: mymailname@163.com ENTER
+        DATA ENTER
+        From: mymailname@163.com
+        To: mymailname@163.com
+        Subject: Hello from CS144 Lab 0!
+        ENTER
+2.3 Listening and Connecting
+    a)sudo apt install netcat
+    b)netcat -v -l -p 9090 (terminal A)
+    c)telnet localhost 9090 (terminal B)
+    d)now i can type any words in one terminal and press ENTER, the words appear in another terminal.
+    e)shut down netcat and telnet will be shuted down too.
+3.1 Writing a network program using an OS stream socket
+    a)update cmake to 3.24 or higher version(look above)
+    b)update gcc to 12
+    c)git clone https://github.com/cs144/minnow
+    d)cd minnow
+    e)cmake -S . -B build (-S:specify the path to the source code directory -B:specify the path to the build directory)
+    f)cmake --build build (--build:compile and build, can specify the build directory)
+3.3 Reading the minnow support code
+    a)read these public interfaces in these files:
+        util/socket.hh
+        util/address.hh
+        util/file_descriptor
+    b)note that Socket is a type of FileDescriptor and the TCPSocket is a type of Socket.
+3.4 Writing webget
+    a)working directory: minnow/build
+    b)edit ../apps/webget.cc
+    c)complete the get_url()
+    d)notice: http, \r\n, Connection: close, EOF
+    e)make
+    f)./apps/webget cs144.keithw.org /hello
+    g)cd ..
+    h)cmake --build build --target check_webget
+    i)try some other hostname and path, make sure the program can also work properly.
+4   A in-memory reliable byte stream.
+    a)edit src/byte_stream.cc and src/byte_stream.hh(pwd:minnow/)
+    b)初始化 byteStream 时要按定义的顺序，否则编译会报错
+    c)cmake --build build --target format
+    d)cmake --build build --target check0
+    e)cmake --build build --target tidy
+    
