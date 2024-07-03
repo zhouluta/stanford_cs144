@@ -25,6 +25,16 @@ protected:
   // Please add any additional state to the ByteStream here, and not to the Writer and Reader interfaces.
   uint64_t capacity_;
   bool error_ {};
+  std::string container_;
+  bool is_closed_;
+  std::string stream_error_;
+  uint64_t pushed_bytes_;
+  uint64_t poped_bytes_;
+
+public:
+  void push(std::string data);
+  void close();
+  uint64_t available_capacity() const;
 };
 
 class Writer : public ByteStream
