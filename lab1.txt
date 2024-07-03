@@ -1,4 +1,5 @@
 https://blog.csdn.net/J__M__C/article/details/132567895
+偶尔会 AddressSanitizer:DEADLYSIGNAL
 1. Getting started
     a)git fetch
     b)git merge origin/check1-startercode
