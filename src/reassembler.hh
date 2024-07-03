@@ -1,7 +1,9 @@
 #pragma once
 
 #include "byte_stream.hh"
-
+#include <list>
+#include <tuple>
+#include <string>
 class Reassembler
 {
 public:
@@ -39,7 +41,26 @@ public:
 
   // Access output stream writer, but const-only (can't write from outside)
   const Writer& writer() const { return output_.writer(); }
+public:
+  /*
+  * Push data into output.
+  */
+  void push_to_output(std::string data, ByteStream& output);
+
+  /*
+  * Push data into buffer.
+  */
+  void buffer_push(uint64_t first_index, uint64_t last_index, std::string data);
+
+  /*
+  * Push data from buffer to output.
+  */
+  void buffer_pop(ByteStream& output);
 
 private:
   ByteStream output_; // the Reassembler writes to this ByteStream
+  bool had_last_{};
+  uint64_t next_index_{};
+  uint64_t buffer_size_{};
+  std::list<std::tuple<uint64_t, uint64_t, std::string>> buffer_{};
 };
