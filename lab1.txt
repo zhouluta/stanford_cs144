@@ -1,0 +1,9 @@
+https://blog.csdn.net/J__M__C/article/details/132567895
+1. Getting started
+    a)git fetch
+    b)git merge origin/check1-startercode
+    c)cmake -S . -B build
+    d)cmake --build build
+2. Putting substrings in a sequence
+    a)edit ./src/reassembler.hh and ./src/reassembler.cc
+    b)cmake --build build --target check1
